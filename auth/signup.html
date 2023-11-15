@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Signup</title>
+</head>
+
+<body>
+    <h1>Signup</h1>
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required><br><br>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="tel" id="phoneNumber" name="phoneNumber" required><br><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br><br>
+
+    <label for="taluka">Taluka:</label>
+    <select id="taluka" name="taluka" required>
+        <option value="">Select Taluka</option>
+    </select><br><br>
+
+    <label for="village">Village:</label>
+    <select id="village" name="village" required>
+        <option value="">Select Village</option>
+    </select><br><br>
+
+    <label for="profilePic">Profile Picture:</label>
+    <input type="file" id="profilePic" name="profilePic"><br><br>
+    <input type="hidden" id="userId" name="userId">
+    <input type="hidden" id="profilePicUrl" name="profilePicUrl">
+
+    <button type="button" onclick="signUp()">SignUp</button>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-auth-compat.js"></script>
+    <script src="/firebaseConfig.js"></script>
+    <script src="/script/signup.js"></script>
+</body>
+
+</html>
