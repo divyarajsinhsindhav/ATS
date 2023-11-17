@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Login | ATS</title>
+    <link rel="stylesheet" href="../styles/login.css" title="" type="" />
 </head>
 
 <body>
-    <div
+    <!-- <div
         style="background-color: #fff; max-width: 500px; margin: 0 auto; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.2);">
         <h1 style="text-align: center; margin-bottom: 20px;">Login</h1>
         <label for="userRole" style="display: block; margin-bottom: 10px;">Select your role:</label>
@@ -28,7 +29,78 @@
         <button type="submit" onclick="signIn()" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Login</button>
         <a href="signup.html" style="display: block; text-align: center; margin-top: 20px; color: #4CAF50;">Register</a>
         <a href="" style="display: block; text-align: center; margin-top: 20px; color: #4CAF50;">Forgot Password</a>
-    </div>
+    </div>  -->
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+          <form action="#">
+            <h1>Create Account</h1>
+            <input type="text" placeholder="First Name" required />
+            <input type="text" placeholder="Last Name" required />
+            <input type="email" placeholder="Email" required />
+            <input type="tel" placeholder="Phone Number" required />
+            <input type="password" placeholder="Password" required />
+            <div class="selection">
+              <label for="taluka">Taluka:</label>
+              <select name="taluka" class="form-select" id="select-taluka">
+                <option value="dhoraji">Dhoraji</option>
+                <option value="gondal">Gondal</option>
+                <option value="jamkandorna">Jamkandorna</option>
+                <option value="jasdan">Jasdan</option>
+                <option value="jetpur">Jetpur</option>
+                <option value="rajkot">Rajkot</option>
+                <option value="kotda sangani">Kotda Sangani</option>
+                <option value="lodhika">Lodhika</option>
+                <option value="upleta">Upleta</option>
+              </select>
+              <br />
+              <label for="village">Village:</label>
+              <select name="village" class="form-select" id="select-village">
+                <!-- Options will be dynamically added here -->
+              </select>
+            </div>
+            <div class="radio">
+              <input type="radio" name="gender" value="male" /><label for="male"
+                >Male</label
+              >
+              <input type="radio" name="gender" value="female" />
+              <label for="female">Female</label>
+            </div>
+            <button>Sign Up</button>
+          </form>
+        </div>
+        <div class="form-container sign-in-container">
+          <form action="#">
+            <h1>Sign in</h1>
+            <input type="email" placeholder="Email" required />
+            <input type="password" placeholder="Password" required />
+            <span id="userrole">Choose a Role:</span>
+            <select name="role" id="role">
+              <option value="citizen">Citizen</option>
+              <option value="Gram Panchayat">Gram Panchayat</option>
+              <option value="taluka panchayat">Taluka Panchayat</option>
+              <option value="jilla panchayat">Jilla Panchayat</option>
+            </select>
+            <a href="#">Forgot your password?</a>
+            <button type="submit" onclick="signIn()">Sign In</button>
+          </form>
+        </div>
+        <div class="overlay-container">
+          <div class="overlay">
+            <div class="overlay-panel overlay-left">
+              <h1>Welcome Back!</h1>
+              <p>
+                To keep connected with us please login with your personal info
+              </p>
+              <button class="ghost" id="signIn">Sign In</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+              <h1>Hello, Friend!</h1>
+              <p>Enter your personal details and start journey with us</p>
+              <button class="ghost" id="signUp">Sign Up</button>
+            </div>
+          </div>
+        </div>
+      </div>
     <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-auth-compat.js"></script>
