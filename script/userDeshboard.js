@@ -23,6 +23,23 @@ auth.onAuthStateChanged((user) => {
                         // Add logic to use the user details as needed
                         // For example, update UI elements with user information
                     });
+                    const application = db.collection('application');
+
+                    // `currentUserID` is valid, so you can proceed with the Firestore query.
+                    application.where('userId', '==', currentUserID).get()
+                        .then((snapshot) => {
+                            if (snapshot.empty) {
+                                console.log('No documents found in the subcollection');
+                            } else {
+                                snapshot.forEach(doc => {
+                                    console.log('Subdocument ID:', doc.id);
+                                    console.log('Subdocument data:', doc.data());
+                                });
+                            }
+                        })
+                        .catch((error) => {
+                            console.error('Error getting subdocuments:', error);
+                        });
                 }
             })
             .catch((error) => {

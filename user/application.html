@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application</title>
+</head>
+
+<body>
+
+    <label for="subject">Subject</label>
+    <input type="text" id="subject" name="subject" required><br><br>
+    <label for="description">Description</label>
+    <textarea name="description" id="description" cols="30" rows="10"></textarea>
+    <br><br>
+    <label for="where">Where you want to sent your application: </label>
+    <select name="where" id="where">
+        <option value="talukaPanchayat">Taluka Panchayat</option>
+        <option value="jillaPanchayat">Jilla Panchayat</option>
+    </select>
+    <br><br>
+    <label for="file">Upload your file</label>
+    <input type="file" id="pdfFile" name="pdfFile" accept=".pdf" required>
+    <br><br>
+    <input type="hidden" id="userId" name="userId" value="123456789">
+    <input type="hidden" id="firstName" name="firstName" value="John">
+    <input type="hidden" id="lastName" name="lastName" value="Doe">
+    <input type="hidden" id="email" name="email" value="johndoe@example.com">
+    <input type="hidden" id="phoneNumber" name="phoneNumber" value="1234567890">
+    <input type="hidden" id="village" name="village" value="Example Village">
+    <input type="hidden" id="taluka" name="taluka" value="Example Taluke">
+    <button id="submit">Submit</button>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-auth-compat.js"></script>
+    <script src="/firebaseConfig.js"></script>
+    <script src="/script/application.js"></script>
+</body>
+
+</html>

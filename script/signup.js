@@ -1,4 +1,5 @@
- document.addEventListener("DOMContentLoaded", function () {
+//Dropdown for taluka and village
+document.addEventListener("DOMContentLoaded", function () {
     const talukaDropdown = document.getElementById("taluka");
     const villageDropdown = document.getElementById("village");
 
@@ -27,7 +28,7 @@
 
         // Clear the existing village list
         villageDropdown.innerHTML = '';
-        
+
         // Fetch villages from Firestore based on the selected taluka
         db.collection('talukaPanchayat')
             .doc(selectedTaluka)
@@ -47,11 +48,11 @@
             });
     }
 
-    // Add an event listener to the taluka select element to update the village list
+    // Add an event listener to the taluka select element to update the village list when the taluka is changed
     talukaDropdown.addEventListener("change", updateVillageList);
 });
 
-
+//create account using email and password
 const signUp = () => {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
@@ -68,13 +69,21 @@ const signUp = () => {
         });
 }
 
+//Save Data into firestore database 
+//Collection -> citizen
 const saveData = (userUID) => {
     const emailInput = document.getElementById('email').value;
     const firstName = document.getElementById('firstName').value;
     const lastName = document.getElementById('lastName').value;
     const phoneNumber = document.getElementById('phoneNumber').value;
+    const gender = document.querySelector('input[name="gender"]:checked').value;
     const taluka = document.getElementById('taluka').value;
     const village = document.getElementById('village').value;
+    if (village === '-----') {
+        var isVillager = false;
+    } else {
+        var isVillager = true;
+    }
     const passwordInput = document.getElementById('password').value;
 
     db.collection('citizen')
@@ -85,7 +94,9 @@ const saveData = (userUID) => {
             lastName: lastName,
             phoneNumber: phoneNumber,
             email: emailInput,
+            gender: gender,
             taluka: taluka,
+            isVillager: isVillager,
             village: village,
             password: passwordInput
         })
@@ -96,3 +107,4 @@ const saveData = (userUID) => {
             alert(error.message);
         });
 }
+
