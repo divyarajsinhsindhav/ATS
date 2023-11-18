@@ -1,5 +1,5 @@
 const signIn = () => {
-    const userRole = document.getElementById('userRole').value;
+    const userRole = document.getElementById('role').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 

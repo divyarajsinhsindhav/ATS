@@ -54,8 +54,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //create account using email and password
 const signUp = () => {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const email = document.getElementById('email_').value;
+    const password = document.getElementById('password_').value;
 
     auth.createUserWithEmailAndPassword(email, password)
         .then((response) => {
@@ -72,7 +72,7 @@ const signUp = () => {
 //Save Data into firestore database 
 //Collection -> citizen
 const saveData = (userUID) => {
-    const emailInput = document.getElementById('email').value;
+    const emailInput = document.getElementById('email_').value;
     const firstName = document.getElementById('firstName').value;
     const lastName = document.getElementById('lastName').value;
     const phoneNumber = document.getElementById('phoneNumber').value;
