@@ -11,7 +11,7 @@
 <body>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-          <!-- <form action="#"> -->
+          <div class="form">
             <h1>Create Account</h1>
             <input type="text" placeholder="First Name" id="firstName" required />
             <input type="text" placeholder="Last Name" id="lastName" required />
@@ -36,11 +36,11 @@
               <input type="radio" name="gender" value="female" />
               <label for="female">Female</label>
             </div>
-            <button>Sign Up</button>
-          <!-- </form> -->
+            <button onclick="signUp()">Sign Up</button>
+          </div>
         </div>
         <div class="form-container sign-in-container">
-          <!-- <form action="#"> -->
+          <div class="form">
             <h1>Sign in</h1>
             <input type="email" placeholder="Email" id="email" required />
             <input type="password" placeholder="Password" id="password" required />
@@ -53,7 +53,7 @@
             </select>
             <a href="#">Forgot your password?</a>
             <button type="submit" onclick="signIn()">Sign In</button>
-          <!-- </form> -->
+          </div>
         </div>
         <div class="overlay-container">
           <div class="overlay">
@@ -76,8 +76,8 @@
     <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-auth-compat.js"></script>
     <script src="/firebaseConfig.js"></script>
-    <script src="/script/login.js"></script>
     <script src="/script/signup.js"></script>
+    <script src="/script/login.js"></script>
 </body>
 
 </html>
