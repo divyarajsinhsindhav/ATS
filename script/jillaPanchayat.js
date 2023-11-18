@@ -105,7 +105,7 @@ const statusUpdate = (doc) => {
             button.textContent = option;
             statusDiv.appendChild(button);
         });
-    }
+    } else if (doc.data().status === 'Closed' || doc.data().status === 'Rejected');
     const statusButtons = statusDiv.querySelectorAll('button');
     statusButtons.forEach(button => {
         button.addEventListener('click', () => {

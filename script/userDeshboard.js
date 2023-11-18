@@ -34,6 +34,7 @@ auth.onAuthStateChanged((user) => {
                                 snapshot.forEach(doc => {
                                     console.log('Subdocument ID:', doc.id);
                                     console.log('Subdocument data:', doc.data());
+                                    addTableRow(doc);
                                 });
                             }
                         })
@@ -53,3 +54,147 @@ addApplication.addEventListener('click', (e) => {
     e.preventDefault();
     window.location.replace("/user/application.html");
 });
+
+const addTableRow = (doc) => {
+    const tbody = document.getElementById('tbody');
+
+    const row = document.createElement('tr');
+
+    const srNo = document.createElement('th');
+    srNo.innerText = '2';
+    row.appendChild(srNo);
+
+    const id = document.createElement('td');
+    id.innerText = `${doc.id}`;
+    row.appendChild(id);
+
+    const subject = document.createElement('td');
+    subject.innerText = `${doc.data().subject}`;
+    row.appendChild(subject);
+
+    const dateTime = document.createElement('td');
+    // Assuming ts is the Timestamp object
+    const timestamp = doc.data().timestamp
+
+    // Convert to milliseconds
+    const milliseconds = timestamp.seconds * 1000 + timestamp.nanoseconds / 1e6;
+
+    // Create a Date object
+    const date = new Date(milliseconds);
+
+    // Convert to IST
+    const options = { timeZone: 'Asia/Kolkata' };
+    const istTime = date.toLocaleString('en-US', options);
+
+    dateTime.innerText = `${istTime}`
+    row.appendChild(dateTime);
+
+    const status = document.createElement('td');
+    const badge = document.createElement('label');
+    badge.innerText = doc.data().status.toUpperCase();
+    badge.setAttribute('id', doc.data().status);
+    if (badge.id === 'Accepted' || badge.id === 'Completed') {
+        badge.setAttribute('class', 'badge badge-success');
+    } else if (badge.id === 'Closed') {
+        badge.setAttribute('class', 'badge badge-danger');
+    } else {
+        badge.setAttribute('class', 'badge text-primary')
+    }
+    status.appendChild(badge);
+    row.appendChild(status);
+
+    const button = document.createElement('td')
+    const buttonRow = document.createElement('button');
+    button.setAttribute('type', 'button');
+    button.setAttribute('data-bs-toggle', 'modal');
+    button.setAttribute('data-bs-target', '#exampleModalCenter');
+    button.textContent = 'View';
+
+    button.appendChild(buttonRow);
+    row.appendChild(button);
+
+    row.setAttribute('id', `tbody ${doc.id}`)
+    tbody.appendChild(row);
+
+    button.addEventListener('click', function () {
+        createModal(doc);
+      });
+
+};
+
+function createModal(doc) {
+
+    const timestamp = doc.data().timestamp
+
+    // Convert to milliseconds
+    const milliseconds = timestamp.seconds * 1000 + timestamp.nanoseconds / 1e6;
+
+    // Create a Date object
+    const date = new Date(milliseconds);
+
+    // Convert to IST
+    const options = { timeZone: 'Asia/Kolkata' };
+    const istTime = date.toLocaleString('en-US', options);
+
+    // Create a new modal
+    const modalId = 'modal-' + doc.id;
+    const modal = document.createElement('div');
+    modal.classList.add('modal', 'fade', 'modal-xl');
+    modal.id = modalId;
+    modal.innerHTML = `
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+        <div class="modal-header bg-primary text-light">
+            <h1 class="modal-title fs-5">APPLICATION DETAIL</h1>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="container-fluid">
+                <div class="row mb-3">
+                    <div class="col">
+                        <p class="fw-bold">Application ID:</p>
+                        <p>${doc.id}</p>
+                    </div>
+                    <div class="col">
+                        <p class="fw-bold">Subject:</p>
+                        <p>${doc.data().subject}</p>
+                    </div>
+                </div>
+                <!-- Add more rows for additional details -->
+                <div class="row mb-3">
+                    <div class="col">
+                        <p class="fw-bold">Date:</p>
+                        <p>${istTime}</p>
+                    </div>
+                    <div class="col">
+                        <p class="fw-bold">Status:</p>
+                        <p>${doc.data().status}</p>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <button id="closeApplication" class="btn btn-danger">Close Application</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    `;
+
+    const closeApplication = document.getElementById('closeApplication');
+
+    
+
+    // Append the modal directly to the body
+    document.body.appendChild(modal);
+
+    // Open the modal
+    const modalInstance = new bootstrap.Modal(document.getElementById(modalId));
+    modalInstance.show();
+    
+
+}
+
