@@ -147,3 +147,57 @@ const handleAuthError = (error) => {
     }
     console.error("Authentication error:", error.code, error.message);
 };
+
+// Panel Shifting for Sign up and Sign in
+const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
+
+signUpButton.addEventListener('click', () => {
+	container.classList.add("right-panel-active");
+});
+
+signInButton.addEventListener('click', () => {
+	container.classList.remove("right-panel-active");
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const taluka = document.getElementById("select-taluka");
+    const village = document.getElementById("select-village");
+
+    // Village data by city
+    const villagesData = {
+        "dhoraji": ["Motivavdi", "Zanzmer", "Bhukhi", "Supedi", "Toraniya", "Nani Parabadi", "Moti Marad", "Hadmatiya", "Patanvav", "Bhader", "Jamnavad"],
+        "gondal": ["Mungavavdi", "Ribda", "Ambardi", "Gundasara", "Pipaliya", "Bharudi", "Daliya", "Hadamtala", "Kolithad", "Lunivav", "Garnala"],
+        "jamkandorna": ["Chavandi", "Dadar", "Kanavadala", "Rajpara", "Thordi", "Vavdi", "Belda", "Hariyasan", "Balapar", "Boriya", "Mota Bhadra"],
+        "jasdan": ["Bogharavadar", "Rangpar", "Veraval", "Virpar", "Bhadala", "Barvala", "Parevala", "Kamalapur", "Lilapur", "Kothi", "Kalasar", "Virnagar"],
+        "jetpur": ["Umrali", "Mevasa", "Virpur", "Rabarika", "Panchpipla", "Derdi", "Pedhla", "Kagvad", "Thana Galol", "Amrapar", "Kharachiya", "Arab Timbdi"],
+        "rajkot": ["Kankot", "Tramba", "Vajdi", "Badpar", "Bedi", "Anandpar", "Halenda", "Kothariya", "Kherdi", "Jhiyana", "Sardhar", "Navagam"],
+        "kotda sangani": ["Noghanchora", "Anida", "Ambaliala", "Devaliya", "Haamatala", "Juna Rajpipla", "Khokhri", "Manekvada", "Navi Mengani", "Satapar", "Thordi"],
+        "lodhika": ["Abhepar", "Balsar", "Chandli", "Chibhda", "Devgam", "Haripar Pal", "Kangashiyali", "Pardi", "Rataiya", "Taravada", "Und Khijadiya", "Vagudad"],
+        "upleta": ["Arni", "Bhankh", "Chikhalia", "Dumiyani", "Gadhala", "Gadhethal", "Hariyasan", "Kerala", "Kharachia", "Kolki", "Navapara", "Tanasva"],
+    };
+
+    // Function to populate the village list based on the selected city
+    function updateVillageList() {
+        const selectedCity = taluka.value;
+        const villages = villagesData[selectedCity] || [];
+
+        // Clear the existing village list
+        village.innerHTML = '';
+
+        // Populate the village list with villages for the selected city
+        villages.forEach(function(villageName) {
+            const listItem = document.createElement("option");
+            listItem.textContent = villageName;
+            listItem.value = villageName; // Set the value for the option (if needed)
+            village.appendChild(listItem);
+        });
+    }
+
+    // Initial population of the village list
+    updateVillageList();
+
+    // Add an event listener to the city select element to update the village list
+    taluka.addEventListener("change", updateVillageList);
+});
