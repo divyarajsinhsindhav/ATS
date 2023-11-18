@@ -1,0 +1,79 @@
+.container{
+    margin: 5rem;
+}
+
+/* Buttons */
+:root {
+    --primary-color: #1352BE;
+    --button-border-color: #1148A7;
+}
+
+button {    
+    border-radius: 30px;
+    border: 1px solid var(--button-border-color);
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 12px 40px;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    /* width: 100% ; */
+}
+
+button:hover {
+    background-color: #0d366d; 
+    color: #FFFFFF; 
+}
+
+.newapplication{
+    margin: 1rem;
+}
+
+body {
+    background: #EDF4FD;
+}
+
+.badge {
+    font-size: 14px;
+    line-height: 1;
+    padding: .375rem .5625rem;
+    font-weight: normal;
+}
+
+.badge.badge-danger {
+    background-color: #FF6347; 
+    color: #FFFFFF;
+}
+
+.badge.badge-info {
+    background-color: #6495ED; 
+    color: #FFFFFF;
+}
+
+.badge.badge-success {
+    background-color: #32CD32;
+    color: #FFFFFF;
+}
+
+/* Table Styles */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 2px solid white;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Container Styles */
+.container {
+    margin: 5rem;
+}
+
+a{
+    text-decoration: none;
+    color: #fff;
+}
