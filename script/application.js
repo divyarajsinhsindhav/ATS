@@ -20,9 +20,9 @@ auth.onAuthStateChanged((user) => {
                     snapshot.forEach(doc => {
                         console.log('User document ID:', doc.id);
                         // Add logic to use the user details as needed
-                        //Get the firstName, lastName, taluka, village, isVillager, phoneNumber, userId
+                        // Get the firstName, lastName, taluka, village, isVillager, phoneNumber, userId
                         isVillager = doc.data().isVillager;
-                        
+
                         const  userID = document.getElementById('userId').value = doc.data().userId;
                         const firstname = document.getElementById('firstName').value = doc.data().firstName;
                         const lastname = document.getElementById('lastName').value = doc.data().lastName;
@@ -32,12 +32,11 @@ auth.onAuthStateChanged((user) => {
                         const taluka_ = document.getElementById('taluka').value = doc.data().taluka;
                         application(firstname, lastname, email_, phonenumber, village_, taluka_, userID);
                     });
-                    
+
                     const where = document.getElementById('where');
                     if (isVillager === true) {
                         where.innerHTML = `<option value="gramPanchayat">Gram Panchayat</option>` + where.innerHTML;
-                    } 
-
+                    }
                 }
             })
             .catch((error) => {
@@ -54,9 +53,10 @@ const application = (firstname, lastname, email_, phonenumber, village_, taluka_
         const subject = document.getElementById('subject').value;
         const description = document.getElementById('description').value;
         const where = document.getElementById('where').value;
+        const file = document.getElementById('pdfFile').files[0];
 
         // Additional checks for subject, description, and where
-        if (!subject || !description || !where) {
+        if (!subject || !description || !where || !file) {
             alert('Please fill in all fields');
             return;
         }
@@ -112,16 +112,57 @@ const application = (firstname, lastname, email_, phonenumber, village_, taluka_
                 'Taluka Panchayat': false,
                 'Jilla Panchayat': false
             },
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        })
+        .then((docRef) => {
+            console.log("Document written with ID: ", docRef.id);
+            const applicationID = docRef.id;
+            const currentUserID = userIdValue; // Replace with your current user ID
+            return uploadFile(file, applicationID, currentUserID, subject);
         })
         .then(() => {
+            alert("Application submitted successfully!");
             window.location.replace("/user/deshboard.html");
         })
         .catch((error) => {
-            console.error("Error adding document: ", error);
+            console.error("Error adding document or uploading file:", error);
             alert("Error submitting application. Please try again later.");
         });
     });
 };
 
+const uploadFile = (file, applicationID, currentUserID) => {
+    const storageRef = storage.ref();
+    const fileName = `${applicationID}_${file.name}`;
+    const fileRef = storageRef.child(fileName);
 
+    // Upload the file
+    return fileRef.put(file)
+        .then(() => {
+            console.log('Uploaded a file');
+
+            // Update metadata after successful upload
+            const newMetadata = {
+                customMetadata: {
+                    'applicationID': applicationID,
+                    'userID': currentUserID,
+                }
+            };
+
+            return fileRef.updateMetadata(newMetadata);
+        })
+        .then(() => {
+            console.log('Updated metadata');
+            //update the document with the file url
+        })
+        .then(() => {
+            const url = `https://firebasestorage.googleapis.com/v0/b/ats-6786c.appspot.com/o/${fileName}?alt=media`;
+            return db.collection('application').doc(applicationID).update({
+                fileUrl: url
+            });
+        })
+        .catch((error) => {
+            console.error('Error uploading file or updating metadata:', error);
+            throw error; // Propagate the error to the next catch block
+        });
+};

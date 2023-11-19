@@ -9,5 +9,6 @@ const firebaseApp = firebase.initializeApp({
 });
 
 const db = firebaseApp.firestore()
-db.settings({ timestampInSnapshot: true })
 const auth = firebaseApp.auth();
+const storage = firebaseApp.storage();
+db.settings({ timestampInSnapshot: true });
