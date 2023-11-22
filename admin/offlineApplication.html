@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Offline Application</title>
+</head>
+<body>
+    <label for="UserID">USER ID</label>
+    <input type="text" id="userID" name="userID" required><br><br>
+    <!-- input email with id emailOffline -->
+    <label for="email">Email</label>
+    <input type="email" id="emailOffline" name="email" required><br><br>
+    <!-- input phoneNumber with id phoneNumber Offline -->
+    <label for="subject">Subject</label>
+    <input type="text" id="subjectOffline" name="subject" required><br><br>
+    <label for="description">Description</label>
+    <textarea name="description" id="descriptionOffline" cols="30" rows="10"></textarea>
+    <br><br>
+    <button id="submitOffline">Submit</button>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-storage-compat.js"></script>
+    <script src="/firebaseConfig.js"></script>
+    <script src="/script/application.js"></script>
+</body>
+</html>
