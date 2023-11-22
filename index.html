@@ -4,9 +4,156 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="../ATS/style.css">
 </head>
 <body>
+    <style>
+        /* Custom Scrollbar */
+
+        ::-webkit-scrollbar 
+        {
+            width: 0.625rem;
+        }
+
+        ::-webkit-scrollbar-track 
+        {
+            background: var(--white-color);
+        }
+
+        ::-webkit-scrollbar-thumb 
+        {
+            background:  #c5c6c7;
+        }
+
+        /* Custom CSS */
+        body
+        {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .jumbotron
+        {
+            background-color: #e6e6fa;
+            height: 1000;
+            padding: 440px 0;
+            margin-bottom: 0;
+        }
+
+
+        /* img
+        {
+            object-fit: cover;
+        } */
+            
+        .header-text
+        {
+            position: absolute;
+            top: 50%;
+            left: 35%;
+            transform: translate(-50%, -50%);
+            color: rgb(0, 0, 0);
+            text-align: center;
+            margin-left: 15rem;
+        }
+
+        .logo 
+        {
+            position: relative;
+            top: -100px;
+            max-width: 500px; /* Adjust as needed */
+        }
+
+
+        .header-text h1
+        {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .header-text p
+        {
+            font-size: 1.5em;
+        }
+
+        section
+        {
+            padding: 50px 0;
+        }
+
+        section h2
+        {
+            margin-bottom: 20px;
+        }
+
+        .container{
+            padding-left: 1rem;
+        }
+    </style>
+
+    <!-- Header -->
+    <header class="jumbotron text-center">
+    <div class="container">
+        <div class="header-text">
+            <img src="https://wpreloaded.com/wp-content/uploads/2018/03/Application-Tracking-System_final-02.jpg" alt="Logo" class="logo">
+            <h1 class="display-4">Welcome To</h1>   
+            <h1 class="display-4" style="color: #000080;">Application Tracking System</h1>
+            <p class="lead">Establishing Good Governance for Rajkot Gram and Jilla Panchayat</p>
+                
+        </div>
+    </div>
+    </header>
+
+
+    <!-- About Section -->
     
+    <section class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>About the System</h2>
+                <p>An Application Tracking System aimed at ensuring efficient governance within Rajkot Gram and Jilla Panchayat.
+                    This system intends to streamline the process of handling applications, requests, and services offered by
+                    the local government, providing transparency and accountability.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="container" class="bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Our Services</h2>
+                    <p>Our system offers the following services:</p>
+                    <ul>
+                        <li>Application submission and tracking</li>
+                        <li>Transparent approval process</li>
+                        <li>Efficient service delivery</li>
+                        <li>Feedback and grievance redressal</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="container">
+        <div class ="row">
+            <div class="col-md-12">
+                <h2>Contact Us</h2>
+                <p>If you have any queries or need assistance, feel free to contact us at:</p>
+                <p>Email: dyddo-vikas-raj@gujarat.gov.in</p>
+                <p>Phone: 0281-123456</p>
+                <p>Address: 8Q4W+XJM, Shroff Rd, Sadar, Rajkot, Gujarat 360001</p>
+            </div>
+        </div>
+   </section>
+
+    <script src="/ATS/firebaseConfig.js"></script>
+    <script src="../ATS/script.js"></script>
 </body>
 </html>
