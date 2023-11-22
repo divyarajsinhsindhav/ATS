@@ -52,7 +52,7 @@ auth.onAuthStateChanged((user) => {
 const addApplication = document.querySelector('#addApplication');
 addApplication.addEventListener('click', (e) => {
     e.preventDefault();
-    window.location.replace("/user/application.html");
+    window.location.replace("../user/application-form.html");
 });
 
 const addTableRow = (doc) => {
