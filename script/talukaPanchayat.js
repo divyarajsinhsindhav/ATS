@@ -1,3 +1,21 @@
+const nav = document.querySelector('.navbar')
+fetch('../components/navbar1.html')
+.then(res=>res.text())
+.then(data=>{
+    nav.innerHTML=data
+    const parser = new DOMParser()
+    const doc = parser.parserFromString(data, 'text/html')
+})
+
+const footer = document.querySelector('.footer')
+fetch('../components/footer1.html')
+.then(res=>res.text())
+.then(data=>{
+    footer.innerHTML=data
+    const parser = new DOMParser()
+    const doc = parser.parserFromString(data, 'text/html')
+})
+
 auth.onAuthStateChanged((user) => {
     if (!user) {
         // User is not logged in, redirect to the login page
