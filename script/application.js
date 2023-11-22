@@ -166,3 +166,45 @@ const uploadFile = (file, applicationID, currentUserID) => {
             throw error; // Propagate the error to the next catch block
         });
 };
+
+//offline Application
+const userId = document.getElementById('userID').value;
+const submitOffline = document.getElementById('submitOffline').value;
+const descriptionOffline = document.getElementById('descriptionOffline').value;
+const subjectOffline = document.getElementById('subjectOffline').value;
+const emailOffline = document.getElementById('emailOffline').value;
+const phoneNumberOffline = document.getElementById('phoneNumberOffline').value;
+submitOffline.addEventListener('submit', () => {
+    db.collection('application').add({
+        subject: subjectOffline,
+        description: descriptionOffline,
+        email: emailOffline,
+        taluka: talukaValue,
+        village: villageValue,
+        phoneNumber: phoneNumberOffline,
+        userId: userId,
+        isOffline: true,
+        isOnline: false,
+        status: 'pending',
+        applicationReceivedBy: {
+            'Gram Panchayat': isGramPanchayat,
+            'Taluka Panchayat': isTalukaPanchayat,
+            'Jilla Panchayat': isJillaPanchayat
+        },
+        applicationForwardedTo: {
+            'Gram Panchayat': false,
+            'Taluka Panchayat': false,
+            'Jilla Panchayat': false
+        },
+    })
+    .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+    })
+    .then(() => {
+        alert("Application submitted successfully!");
+    })
+    .catch((error) => {
+        alert("Error submitting application. Please try again later.", error);
+    });
+});
+
