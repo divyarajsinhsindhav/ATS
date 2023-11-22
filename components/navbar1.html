@@ -10,9 +10,9 @@
         <li><a href="#">About</a></li>
         <li><a href="#">Services</a></li>
         <li><a href="#">Contact Us</a></li>
-        <li><button><a href="../auth/login.html">Login</a></button></li>
+        <li><button class="login-btn"><a href="../auth/login.html">Login</a></button></li>
     </ul>
-    <a href="#" class="fs-3 d-inline-block">
+    <a href="#" class="logo fs-3 d-inline-block">
         <img src="../assets/img/logo-removebg-preview.png" alt="" height="40px" width="40px">
         ATS
     </a>
@@ -34,6 +34,18 @@
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .login-btn{
+        background-color: #1148a7;
+        border-color: white;
+        border-radius: 50px;
+        padding-inline: 10px;
+    }
+
+    .login-btn:hover{
+        background-color: #5383d5;
+        color: #333;
     }
 
     .navbar input[type="checkbox"],
@@ -88,7 +100,7 @@
     }
 
     .navbar a:hover{
-        color: #117964;
+        color: #8cb1f2;
     }
 
     @media (max-width: 768px){
@@ -137,7 +149,7 @@
             height: 4px;
             width: 100%;
             border-radius: 10px;
-            background: #333;
+            background: #1148a7;
         }
         
         .navbar-container .hamburger-lines .line1{
