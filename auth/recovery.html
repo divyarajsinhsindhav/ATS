@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>password recovry</title>
+</head>
+<body>
+    <h3>Password Recovry</h3>
+    <P class="error"></P>
+    <div>
+        <input type="email" class="forgetemail" id="floatinginput" placeholder="Enter your Email">
+        <label for="floatinginput">Email address</label>
+    </div>
+    <button class="btn" id="submit-data">Submit</button>
+
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-auth-compat.js"></script>
+    <script src="/firebaseConfig.js"></script>
+    <script src="/script/recovery.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+</html>
