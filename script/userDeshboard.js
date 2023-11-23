@@ -181,9 +181,13 @@ function createModal(doc) {
             </div>
         </div>
     </div>
-
-
     `;
+
+    // Add a click event listener to the button
+    const closeApplicationButton = modal.querySelector('#closeApplication');
+    closeApplicationButton.addEventListener('click', () => {
+        closeApp(doc.id);
+    });
 
     // Append the modal directly to the body
     document.body.appendChild(modal);
@@ -192,7 +196,6 @@ function createModal(doc) {
     const modalInstance = new bootstrap.Modal(document.getElementById(modalId));
     modalInstance.show();
     
-
 }
 
     
@@ -209,3 +212,17 @@ logoutButton.addEventListener('click', () => {
         });
 });
 
+// Assuming you have a global function closeApp
+function closeApp(applicationId) {
+    db.collection('application').doc(applicationId).update({
+        status: 'Closed by User'
+    })
+    .then(() => {
+        console.log('Application closed successfully');
+        alert('Application closed successfully');
+        window.location.reload();
+    })
+    .catch((error) => {
+        console.error('Error closing application:', error);
+    });
+}

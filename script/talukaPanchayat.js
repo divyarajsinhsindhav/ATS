@@ -149,47 +149,6 @@ function createModal(appDoc) {
         </div>
     `;
 
-    // Generate and append the status update button
-    generateButton(doc, doc.id);
-
-    const button = document.createElement('button');
-    button.setAttribute('type', 'button');
-    button.setAttribute('id', 'passApplication');
-    button.setAttribute('class', 'btn btn-primary');
-    button.textContent = `Pass Application to Jilla Panchayat`;
-    const container = document.getElementById("button " + appDoc.id);
-    container.appendChild(button);
-
-    button.addEventListener('click', () => {
-        // Handle button click, e.g., show application details
-        console.log(`Button clicked for Application ID: ${appDoc.id}`);
-        console.log(appDoc);
-
-        // Update the status field in the specific application document
-        const applicationRef = db.collection('application').appDoc(appDoc.id);
-
-        applicationRef.update({
-            applicationForwardedTo: {
-                'Gram Panchayat': false,
-                'Taluka Panchayat': false,
-                'Jilla Panchayat': true,
-            },
-            applicationReceivedBy: {
-                'Gram Panchayat': false,
-                'Taluka Panchayat': false,
-                'Jilla Panchayat': true,
-            },
-            status: 'Application Forwarded to Jilla Panchayat',
-        })
-        .then(() => {
-            console.log('Application status updated successfully');
-            console.log(appDoc);
-        })
-        .catch(error => {
-            console.error('Error updating application status:', error);
-        });
-    });
-
     document.body.appendChild(modal);
 
     const modalInstance = new bootstrap.Modal(document.getElementById(modalId));
