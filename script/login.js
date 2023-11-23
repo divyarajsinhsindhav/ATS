@@ -160,3 +160,22 @@ signUpButton.addEventListener('click', () => {
 signInButton.addEventListener('click', () => {
 	container.classList.remove("right-panel-active");
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const signInButton = document.getElementById("signInButton");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+
+    // Add event listener for Enter key press in the email and password fields
+    emailInput.addEventListener("keyup", function (event) {
+      if (event.key === "Enter") {
+        signInButton.click();
+      }
+    });
+
+    passwordInput.addEventListener("keyup", function (event) {
+      if (event.key === "Enter") {
+        signInButton.click();
+      }
+    });
+  });
