@@ -38,6 +38,8 @@ auth.onAuthStateChanged((user) => {
                     });
 
                     const where = document.getElementById('where');
+                    console.log(where)
+                    console.log(isVillager)
                     if (isVillager === true) {
                         where.innerHTML = `<option value="gramPanchayat">Gram Panchayat</option>` + where.innerHTML;
                     }
