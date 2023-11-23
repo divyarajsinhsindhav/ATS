@@ -52,7 +52,7 @@ auth.onAuthStateChanged((user) => {
 const addApplication = document.querySelector('#addApplication');
 addApplication.addEventListener('click', (e) => {
     e.preventDefault();
-    window.location.replace("../user/application-form.html");
+    window.location.replace("../user/application.html");
 });
 
 const addTableRow = (doc) => {
@@ -197,4 +197,18 @@ function createModal(doc) {
     
 
 }
+
+
+const logoutButton = document.getElementById('logout');
+
+logoutButton.addEventListener('click', () => {
+    auth.signOut()
+        .then(() => {
+            alert("logged out successfully.")
+            window.location.assign("/auth/login.html");
+        })
+        .catch((error) => {
+            console.error("Logout error:", error);
+        });
+});
 

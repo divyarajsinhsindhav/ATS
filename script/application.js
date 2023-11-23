@@ -207,4 +207,3 @@ submitOffline.addEventListener('submit', () => {
         alert("Error submitting application. Please try again later.", error);
     });
 });
-
