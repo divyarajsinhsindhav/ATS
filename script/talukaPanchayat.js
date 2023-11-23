@@ -94,66 +94,6 @@ const addTableRow = (appDoc, incremental_id) => {
 };
 
 function createModal(appDoc) {
-    // const timestamp = appDoc.data().timestamp;
-
-    // // Convert to milliseconds
-    // const milliseconds = timestamp.seconds * 1000 + timestamp.nanoseconds / 1e6;
-    // const date = new Date(milliseconds);
-    // const options = { timeZone: 'Asia/Kolkata' };
-    // const istTime = date.toLocaleString('en-US', options);
-
-    // Create a new modal
-    // const modalId = 'modal-' + appDoc.id;
-    // const modal = document.createElement('div');
-    // modal.classList.add('modal', 'fade', 'modal-xl');
-    // modal.id = modalId;
-    // modal.innerHTML = `modal-view-button
-    //     <div class="modal-dialog modal-dialog-centered modal-xl">
-    //         <div class="modal-content">
-    //             <div class="modal-header bg-primary text-light">
-    //                 <h1 class="modal-title fs-5">APPLICATION DETAIL</h1>
-    //                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-    //             </div>
-    //             <div class="modal-body">
-    //                 <div class="container-fluid">
-    //                     <div class="row mb-3">
-    //                         <div class="col">
-    //                             <p class="fw-bold">Application ID:</p>
-    //                             <p>${appDoc.id}</p>
-    //                         </div>
-    //                         <div class="col">
-    //                             <p class="fw-bold">Subject:</p>
-    //                             <p>${appDoc.data().subject}</p>
-    //                         </div>
-    //                     </div>
-    //                     <div class="row mb-3">
-    //                         <div class="col">
-    //                             <p class="fw-bold">Date:</p>
-    //                             <p>${istTime}</p>
-    //                         </div>
-    //                         <div class="col">
-    //                             <p class="fw-bold">Status:</p>
-    //                             <p>${appDoc.data().status}</p>
-    //                         </div>
-    //                     </div>
-    //                     <div class="row mb-3">
-    //                         <p class="fw-bold">Document Link:</p>
-    //                         <p><a href="${appDoc.data().fileUrl}">${appDoc.data().fileUrl}</a></p>
-    //                     </div>
-    //                     <div class="row mb-3" id="button ${appDoc.id}">
-    //                         <!-- The status update button will be appended here -->
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     </div>
-    // `;
-
-    // document.body.appendChild(modal);
-
-    // const modalInstance = new bootstrap.Modal(document.getElementById(modalId));
-    // modalInstance.show();
-
     const timestamp = appDoc.data().timestamp
 
     // Convert to milliseconds
