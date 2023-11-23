@@ -6,20 +6,17 @@ auth.onAuthStateChanged((user) => {
     if (user) {
         const talukaPanchayat = db.collection('talukaPanchayat');
         email = user.email;
-        let taluka;  // Declare taluka variable to store its value
+        let taluka;
 
         talukaPanchayat.where('email', '==', email).get().then((snapshot) => {
             snapshot.forEach(doc => {
                 console.log(doc.id, '=>', doc.data());
                 taluka = doc.id;
 
-
-                // Move the second query inside the loop
                 const application = db.collection('application');
                 let incremental_id = 1;
                 application.where('applicationReceivedBy.Taluka Panchayat', '==', true)
                             .where('taluka', '==', taluka).get().then((snapshot) => {
-                    // Handle the results of the second query
                     snapshot.forEach(appDoc => {
                         console.log(appDoc.id, '=>', appDoc.data());
                         // Process application document as needed
@@ -36,14 +33,13 @@ auth.onAuthStateChanged((user) => {
 const addTableRow = (appDoc, incremental_id) => {
     const tbody = document.getElementById('tbody');
 
-    // Create a new 'row' element
     const row = document.createElement('tr');
 
     const srNo = document.createElement('th');
     
     srNo.innerText = incremental_id ;
     row.appendChild(srNo);
-    
+
     const id = document.createElement('td')
     id.innerText = `${appDoc.id}`
     row.appendChild(id)
@@ -57,11 +53,7 @@ const addTableRow = (appDoc, incremental_id) => {
 
     // Convert to milliseconds
     const milliseconds = timestamp.seconds * 1000 + timestamp.nanoseconds / 1e6;
-
-    // Create a Date object
     const date = new Date(milliseconds);
-
-    // Convert to IST
     const options = { timeZone: 'Asia/Kolkata' };
     const istTime = date.toLocaleString('en-US', options);
 
@@ -106,11 +98,7 @@ function createModal(appDoc) {
 
     // Convert to milliseconds
     const milliseconds = timestamp.seconds * 1000 + timestamp.nanoseconds / 1e6;
-
-    // Create a Date object
     const date = new Date(milliseconds);
-
-    // Convert to IST
     const options = { timeZone: 'Asia/Kolkata' };
     const istTime = date.toLocaleString('en-US', options);
 
@@ -119,7 +107,7 @@ function createModal(appDoc) {
     const modal = document.createElement('div');
     modal.classList.add('modal', 'fade', 'modal-xl');
     modal.id = modalId;
-    modal.innerHTML = `
+    modal.innerHTML = `modal-view-button
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
@@ -138,7 +126,6 @@ function createModal(appDoc) {
                                 <p>${appDoc.data().subject}</p>
                             </div>
                         </div>
-                        <!-- Add more rows for additional details -->
                         <div class="row mb-3">
                             <div class="col">
                                 <p class="fw-bold">Date:</p>
@@ -163,17 +150,16 @@ function createModal(appDoc) {
     `;
 
     // Generate and append the status update button
-    // generateButton(doc, doc.id);
+    generateButton(doc, doc.id);
 
     const button = document.createElement('button');
     button.setAttribute('type', 'button');
-    // button.setAttribute('id', 'passApplication');
+    button.setAttribute('id', 'passApplication');
     button.setAttribute('class', 'btn btn-primary');
     button.textContent = `Pass Application to Jilla Panchayat`;
     const container = document.getElementById("button " + appDoc.id);
     container.appendChild(button);
 
-    // Add a click event listener to the button
     button.addEventListener('click', () => {
         // Handle button click, e.g., show application details
         console.log(`Button clicked for Application ID: ${appDoc.id}`);
@@ -204,55 +190,44 @@ function createModal(appDoc) {
         });
     });
 
-    // Append the modal directly to the body
     document.body.appendChild(modal);
 
-    // Open the modal
     const modalInstance = new bootstrap.Modal(document.getElementById(modalId));
     modalInstance.show();
 }
 
+function generateButton(doc, targetElementId) {
+    const button = document.createElement('button');
+    button.setAttribute('type', 'button');
+    button.setAttribute('id', 'passApplication');
+    button.setAttribute('class', 'btn btn-primary');
+    button.textContent = `Pass Application to Jilla Panchayat`;
 
-// function generateButton(doc, targetElementId) {
-//     // Create a button element
-//     const button = document.createElement('button');
-//     button.setAttribute('type', 'button');
-//     // button.setAttribute('id', 'passApplication');
-//     button.setAttribute('class', 'btn btn-primary');
-//     button.textContent = `Pass Application to Jilla Panchayat`;
+    const container = document.getElementById(targetElementId);
+    container.appendChild(button);
 
-//     // Append the button to the specified container
-//     const container = document.getElementById(targetElementId);
-//     container.appendChild(button);
+    button.addEventListener('click', () => {
+        const applicationRef = db.collection('application').doc(doc.id);
 
-//     // Add a click event listener to the button
-//     button.addEventListener('click', () => {
-//         // Handle button click, e.g., show application details
-//         console.log(`Button clicked for Application ID: ${doc.id}`);
-//         console.log(doc);
-
-//         // Update the status field in the specific application document
-//         const applicationRef = db.collection('application').doc(doc.id);
-
-//         applicationRef.update({
-//             applicationForwardedTo: {
-//                 'Gram Panchayat': false,
-//                 'Taluka Panchayat': false,
-//                 'Jilla Panchayat': true,
-//             },
-//             applicationReceivedBy: {
-//                 'Gram Panchayat': false,
-//                 'Taluka Panchayat': false,
-//                 'Jilla Panchayat': true,
-//             },
-//             status: 'Application Forwarded to Jilla Panchayat',
-//         })
-//         .then(() => {
-//             console.log('Application status updated successfully');
-//             console.log(doc);
-//         })
-//         .catch(error => {
-//             console.error('Error updating application status:', error);
-//         });
-//     });
-// }
+        applicationRef.update({
+            applicationForwardedTo: {
+                'Gram Panchayat': false,
+                'Taluka Panchayat': false,
+                'Jilla Panchayat': true,
+            },
+            applicationReceivedBy: {
+                'Gram Panchayat': false,
+                'Taluka Panchayat': false,
+                'Jilla Panchayat': true,
+            },
+            status: 'Application Forwarded to Jilla Panchayat',
+        })
+        .then(() => {
+            console.log('Application status updated successfully');
+            console.log(doc);
+        })
+        .catch(error => {
+            console.error('Error updating application status:', error);
+        });
+    });
+}

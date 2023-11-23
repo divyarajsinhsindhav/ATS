@@ -143,51 +143,47 @@ function createModal(doc) {
     modal.classList.add('modal', 'fade', 'modal-xl');
     modal.id = modalId;
     modal.innerHTML = `
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-    <div class="modal-content">
-        <div class="modal-header bg-primary text-light">
-            <h1 class="modal-title fs-5">APPLICATION DETAIL</h1>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="container-fluid">
-                <div class="row mb-3">
-                    <div class="col">
-                        <p class="fw-bold">Application ID:</p>
-                        <p>${doc.id}</p>
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-lg"> <!-- Change to modal-fullscreen-lg for full-screen on larger screens -->
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-light">
+                <h1 class="modal-title fs-5">APPLICATION DETAIL</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <p class="fw-bold">Application ID:</p>
+                            <p>${doc.id}</p>
+                        </div>
+                        <div class="col">
+                            <p class="fw-bold">Subject:</p>
+                            <p>${doc.data().subject}</p>
+                        </div>
                     </div>
-                    <div class="col">
-                        <p class="fw-bold">Subject:</p>
-                        <p>${doc.data().subject}</p>
+                    <!-- Add more rows for additional details -->
+                    <div class="row mb-3">
+                        <div class="col">
+                            <p class="fw-bold">Date:</p>
+                            <p>${istTime}</p>
+                        </div>
+                        <div class="col">
+                            <p class="fw-bold">Status:</p>
+                            <p>${doc.data().status}</p>
+                        </div>
                     </div>
-                </div>
-                <!-- Add more rows for additional details -->
-                <div class="row mb-3">
-                    <div class="col">
-                        <p class="fw-bold">Date:</p>
-                        <p>${istTime}</p>
-                    </div>
-                    <div class="col">
-                        <p class="fw-bold">Status:</p>
-                        <p>${doc.data().status}</p>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col">
-                        <button id="closeApplication" class="btn btn-danger">Close Application</button>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <button id="closeApplication" class="btn btn-danger">Close Application</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
     `;
-
-    const closeApplication = document.getElementById('closeApplication');
-
-    
 
     // Append the modal directly to the body
     document.body.appendChild(modal);
@@ -199,7 +195,7 @@ function createModal(doc) {
 
 }
 
-
+    
 const logoutButton = document.getElementById('logout');
 
 logoutButton.addEventListener('click', () => {
