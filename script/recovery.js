@@ -6,7 +6,7 @@ submit_data.addEventListener("click", () => {
         .then(() => {
             forgetEmail.value = ""; // corrected to reset the input value
 
-            swal("Your Password has been reset!", "Please check your email");
+            swal("Mail send", "Please check your email");
         })
         .catch((error) => {
             const errorCode = error.code;
