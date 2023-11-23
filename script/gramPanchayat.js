@@ -145,7 +145,7 @@ function createModal(doc) {
     // Create a new modal
     const myModal = 'modal-' + doc.id;
     const modal = document.createElement('div');
-    modal.classList.add('modal', 'fade', 'modal-xl');
+    modal.classList.add('modal', 'fade', 'modal-xxl');
     modal.id = myModal;
     modal.innerHTML = `
     <div class="modal-dialog modal-dialog-centered modal-xl">
