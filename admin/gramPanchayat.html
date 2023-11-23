@@ -160,6 +160,7 @@ th,td{
         <div class="newapplication">
             <h1 class="application-heading">Gram Panchayat Dashboard</h1>
             <button id="addApplication" class="modal-view-button">Add Application</button>
+            <button id="logout" class="modal-view-button">logout</button>
         </div>
         <table class="table table-condensed table-responsive">
             <thead>
@@ -173,44 +174,7 @@ th,td{
                     <th>DETAILS</th>            
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>abc</td>
-                    <td>xyz</td>
-                    <td>date</td>
-                    <td><lable class="badge badge-danger">Pending</lable></td>
-                    <td>
-                        <!-- Button trigger modal -->
-                        <button type="button" data-toggle="modal" id="myBtn" class="modal-view-button">
-                         View
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>ABC</td>
-                    <td>XYZ</td>
-                    <td>date</td>
-                    <td><lable class="badge badge-info">In Progress</lable></td>
-                    <td>
-                        <button type="button" data-toggle="modal" id="myBtn" class="modal-view-button">
-                            View
-                        </button>
-                    </td>    
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>fh</td>
-                    <td>ert</td>
-                    <td>date</td>
-                    <td><lable class="badge badge-success">Completed</lable></td>
-                    <td>
-                        <button type="button" id="myBtn" class="modal-view-button">
-                            View
-                        </button>
-                    </td>
-                </tr>
+            <tbody id="tbody">
             </tbody>
         </table>
     </div>

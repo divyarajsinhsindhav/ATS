@@ -174,44 +174,7 @@
                     <th>DETAILS</th>            
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>abc</td>
-                    <td>xyz</td>
-                    <td>date</td>
-                    <td><lable class="badge badge-danger">Pending</lable></td>
-                    <td>
-                        <!-- Button trigger modal -->
-                        <button type="button" data-toggle="modal" id="myBtn" class="modal-view-button">
-                         View
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>ABC</td>
-                    <td>XYZ</td>
-                    <td>date</td>
-                    <td><lable class="badge badge-info">In Progress</lable></td>
-                    <td>
-                        <button type="button" data-toggle="modal" id="myBtn" class="modal-view-button">
-                            View
-                        </button>
-                    </td>    
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>fh</td>
-                    <td>ert</td>
-                    <td>date</td>
-                    <td><lable class="badge badge-success">Completed</lable></td>
-                    <td>
-                        <button type="button" id="myBtn" class="modal-view-button">
-                            View
-                        </button>
-                    </td>
-                </tr>
+            <tbody id="tbody">
             </tbody>
         </table>
     </div>
@@ -253,6 +216,10 @@
 </div>
     <div class="footer">
     </div>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-auth-compat.js"></script>
+    <script src="/firebaseConfig.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
     <script src="../script/talukaPanchayat.js"></script>

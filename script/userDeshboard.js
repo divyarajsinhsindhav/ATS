@@ -24,6 +24,7 @@ auth.onAuthStateChanged((user) => {
                         // For example, update UI elements with user information
                     });
                     const application = db.collection('application');
+                    let incremental_id = 1;
 
                     // `currentUserID` is valid, so you can proceed with the Firestore query.
                     application.where('userId', '==', currentUserID).get()
@@ -34,7 +35,7 @@ auth.onAuthStateChanged((user) => {
                                 snapshot.forEach(doc => {
                                     console.log('Subdocument ID:', doc.id);
                                     console.log('Subdocument data:', doc.data());
-                                    addTableRow(doc);
+                                    addTableRow(doc, incremental_id++);
                                 });
                             }
                         })
@@ -55,13 +56,13 @@ addApplication.addEventListener('click', (e) => {
     window.location.replace("../user/application.html");
 });
 
-const addTableRow = (doc) => {
+const addTableRow = (doc, incremental_id) => {
     const tbody = document.getElementById('tbody');
 
     const row = document.createElement('tr');
 
     const srNo = document.createElement('th');
-    srNo.innerText = '2';
+    srNo.innerText = incremental_id;
     row.appendChild(srNo);
 
     const id = document.createElement('td');
