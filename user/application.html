@@ -11,87 +11,91 @@
     body {
     font-family: Arial, sans-serif;
     margin: 20px;
-}
+    }
 
-.container {
-    max-width: 600px;
-    margin: auto;
-}
+    .container {
+        max-width: 600px;
+        margin: auto;
+    }
 
-h2 {
-    text-align: center;
-    margin-bottom: 30px;
-}
+    h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
 
-.application-form {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #edf4fd;
-}
+    .application-form {
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #edf4fd;
+    }
 
-.form-group {
-    margin-bottom: 15px;
-}
-   </style>
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .center {
+        margin: 0;
+        position: relative;
+        left: 33%;
+    }
+    </style>
 </head>
 
 <body>
     <div class="container">
         <h2>Application Form</h2>
-        <div class="application-form" id="applicationForm">
-            <input type="hidden" id="userid" name="userid" value="">
-            <div class="form-group">
-                <label for="firstName">First Name</label>
-                <input type="text" class="form-control" id="firstName" required>
-            </div>
+        <form action="">
+            <div class="application-form" id="applicationForm">
+                <input type="hidden" id="userId" name="userid" value="">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" disabled>
+                </div>
 
-            <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <input type="text" class="form-control" id="lastName" required>
-            </div>
+                <div class="form-group">
+                    <label for="mobileNumber">Mobile Number</label>
+                    <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter the mobile number" disabled>
+                </div>
 
-            <div class="form-group">
-                <label for="mobileNumber">Mobile Number</label>
-                <input type="tel" class="form-control" id="mobileNumber" required>
-            </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter your email address" disabled>
+                </div>
 
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" class="form-control" id="email" required>
-            </div>
+                <div class="form-group">
+                    <label for="address">Permenant Address</label>
+                    <textarea class="form-control" id="address" rows="3" required></textarea>
+                </div>
 
-            <div class="form-group">
-                <label for="address">Address</label>
-                <textarea class="form-control" id="address" rows="3" required></textarea>
-            </div>
+                <div class="form-group">
+                    <label for="subject">Application Subject</label>
+                    <input type="text" class="form-control" id="subject" required>
+                </div>
 
-            <div class="form-group">
-                <label for="subject">Subject</label>
-                <input type="text" class="form-control" id="subject" required>
-            </div>
+                <div class="form-group">
+                    <label for="description">Describe your application here..</label>
+                    <textarea class="form-control" id="description" rows="5" required></textarea>
+                </div>
 
-            <div class="form-group">
-                <label for="applicationText">Application Text</label>
-                <textarea class="form-control" id="applicationText" rows="5" required></textarea>
-            </div>
+                <div class="form-group">
+                    <label for="pdfFile">Attachment (If any)</label>
+                    <input type="file" class="form-control-file" id="pdfFile" accept="application/pdf">
+                </div>
 
-            <div class="form-group">
-                <label for="pdfDocument">Add Document</label>
-                <input type="file" class="form-control-file" id="pdfDocument">
-            </div>
+                <div class="form-group">
+                    <label for="where">Selection</label>
+                    <select class="form-control" id="where">
+                        <option value="gramPanchayat">Gram Panchayat</option>
+                        <option value="talukaPanchayat">Taluka Panchayat</option>
+                        <option value="jillaPanchayat">Jilla Panchayat</option>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="selection">Selection</label>
-                <select class="form-control" id="selection">
-                    <option value="Gram Panchayat">Gram Panchayat</option>
-                    <option value="Taluka Panchayat">Taluka Panchayat</option>
-                    <option value="Jilla Panchayat">Jilla Panchayat</option>
-                </select>
+                <button type="submit" id="submit" class="btn btn-primary center">Submit</button>
+                <button type="reset" id="cancel" class="btn btn-danger center">Cancel</button>
             </div>
-
-            <button type="submit" id="submit" class="btn btn-primary">Submit</button>
-        </div>
+        </form>
     </div>
     <!-- <label for="subject">Subject</label>
     <input type="text" id="subject" name="subject" required><br><br>
