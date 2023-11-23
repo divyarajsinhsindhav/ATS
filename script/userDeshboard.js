@@ -173,7 +173,7 @@ function createModal(doc) {
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col">
+                        <div class="col" id="closeAppCol">
                             <button id="closeApplication" class="btn btn-danger">Close Application</button>
                         </div>
                     </div>
@@ -182,6 +182,11 @@ function createModal(doc) {
         </div>
     </div>
     `;
+
+    if (doc.data().status === 'Accepted' || doc.data().status === 'Completed' || doc.data().status === 'Closed' || doc.data().status === 'Closed by User' || doc.data().status === 'Rejected') {
+        const closeAppCol = modal.querySelector('#closeAppCol');
+        closeAppCol.setAttribute('hidden', 'true');  
+    }
 
     // Add a click event listener to the button
     const closeApplicationButton = modal.querySelector('#closeApplication');

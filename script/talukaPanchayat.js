@@ -138,7 +138,7 @@ function createModal(appDoc) {
                         </div>
                         <div class="row mb-3">
                             <p class="fw-bold">Document Link:</p>
-                            <p>${appDoc.data().fileUrl}</p>
+                            <p><a href="${appDoc.data().fileUrl}">${appDoc.data().fileUrl}</a></p>
                         </div>
                         <div class="row mb-3" id="button ${appDoc.id}">
                             <!-- The status update button will be appended here -->
