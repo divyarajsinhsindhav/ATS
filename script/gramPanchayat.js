@@ -9,13 +9,14 @@ auth.onAuthStateChanged((user) => {
         user = auth.currentUser;
         console.log(user.email);
 
+
         talukaPanchayat.get().then((talukaSnapshot) => {
             talukaSnapshot.forEach(talukaDoc => {
                 const villages = talukaPanchayat.doc(talukaDoc.id).collection('villages');
                 villages.get().then((villageSnapshot) => {
                     villageSnapshot.forEach(villageDoc => {
                         const villageId = villageDoc.id;
-
+                        let incremental_id = 1;
                         // Query applications for the current village
                         application.where('applicationReceivedBy.Gram Panchayat', '==', true)
                             .where('village', '==', villageId)
@@ -23,9 +24,10 @@ auth.onAuthStateChanged((user) => {
                             .then((appSnapshot) => {
                                 appSnapshot.forEach(appDoc => {
                                     const applicationId = appDoc.id;
-
+                                    addTableRow(appDoc, incremental_id++);
+                                    console.log(appDoc.id, '=>', appDoc.data());
                                     // Call the function to generate buttons
-                                    generateButton(applicationId, appDoc.data());
+                                    // generateButton(applicationId, appDoc.data());
                                 });
                             })
                             .catch(error => {
@@ -38,49 +40,7 @@ auth.onAuthStateChanged((user) => {
     }
 });
 
-// Function to generate a button for each application
-function generateButton(applicationId, appDoc) {
-    // Create a button element
-    const button = document.createElement('button');
-    button.setAttribute('type', 'button');
-    button.setAttribute('class', 'btn btn-primary');
-    button.textContent = `Application ID: ${applicationId} This Application pass to TalukaPanchayat`;
 
-    // Append the button to a container (e.g., a div)
-    const buttonContainer = document.getElementById('buttonContainer');
-    buttonContainer.appendChild(button);
-
-    // Add a click event listener to the button
-    button.addEventListener('click', () => {
-        // Handle button click, e.g., show application details
-        console.log(`Button clicked for Application ID: ${applicationId}`);
-        console.log(appDoc);
-    
-        // Update the status field in the specific application document
-        const applicationRef = db.collection('application').doc(applicationId);
-    
-        applicationRef.update({
-            applicationForwardedTo: {
-                'Gram Panchayat': false,
-                'Taluka Panchayat': true,
-                'Jilla Panchayat': false,
-            },
-            applicationReceivedBy: {
-                'Gram Panchayat': false,
-                'Taluka Panchayat': true,
-                'Jilla Panchayat': false,
-            },
-            status: 'Application Forwarded to Taluka Panchayat',
-        })
-        .then(() => {
-            console.log('Application status updated successfully');
-            console.log(appDoc)
-        })
-        .catch(error => {
-            console.error('Error updating application status:', error);
-        });
-    });
-} 
 
 const addApplication = document.querySelector('#addApplication');
 addApplication.addEventListener('click', (e) => {
