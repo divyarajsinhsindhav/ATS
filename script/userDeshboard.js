@@ -140,10 +140,10 @@ function createModal(doc) {
     // Create a new modal
     const modalId = 'modal-' + doc.id;
     const modal = document.createElement('div');
-    modal.classList.add('modal', 'fade', 'modal-xl');
+    modal.classList.add('modal', 'fade', 'modal-xxl');
     modal.id = modalId;
     modal.innerHTML = `
-    <div class="modal-dialog modal-dialog-centered modal-fullscreen-lg"> <!-- Change to modal-fullscreen-lg for full-screen on larger screens -->
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-xl"> <!-- Change to modal-fullscreen-lg for full-screen on larger screens -->
         <div class="modal-content">
             <div class="modal-header bg-primary text-light">
                 <h1 class="modal-title fs-5">APPLICATION DETAIL</h1>
