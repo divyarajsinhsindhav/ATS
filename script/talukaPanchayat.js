@@ -30,6 +30,12 @@ auth.onAuthStateChanged((user) => {
     }
 });
 
+const addApplication = document.querySelector('#addOpp');
+addApplication.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.replace("../user/application.html");
+});
+
 const addTableRow = (appDoc, incremental_id) => {
     const tbody = document.getElementById('tbody');
 
@@ -213,7 +219,7 @@ function createModal(appDoc) {
             statusOptions = statusOptions1;
         } else if (appDoc.data().status === 'Accepted') {
             statusOptions = statusOptions2;
-        } else if (appDoc.data().status === 'In Progress' || appDoc.data().status === 'On Hold' || appDoc.data().status === 'Closed by User') {
+        } else if (appDoc.data().status === 'InProgress' || appDoc.data().status === 'On Hold' || appDoc.data().status === 'Closed by User') {
             statusOptions = statusOptions3;
         }
 
