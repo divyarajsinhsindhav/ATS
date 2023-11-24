@@ -67,11 +67,18 @@ const addTableRow = (doc, incremental_id) => {
     badge.setAttribute('id', doc.data().status);
     if (badge.id === 'Accepted' || badge.id === 'Completed') {
         badge.setAttribute('class', 'badge badge-success');
-    } else if (badge.id === 'Closed') {
+    } else if ( badge.id === 'Closed by User') {
         badge.setAttribute('class', 'badge badge-danger');
+    } else if (badge.id === 'Rejected') {
+        badge.setAttribute('class', 'badge badge-warning');
+    } else if (badge.id === 'On Hold') {
+        badge.setAttribute('class', 'badge badge-info');
+    } else if (badge.id === 'InProgress') {
+        badge.setAttribute('class', 'badge badge-primary');
     } else {
-        badge.setAttribute('class', 'badge text-primary')
+        badge.setAttribute('class', 'badge text-primary');
     }
+    
     status.appendChild(badge);
     row.appendChild(status);
 
@@ -170,6 +177,13 @@ function createModal(appDoc) {
                             <p><a href="${appDoc.data().fileUrl}">Click Here</a></p>
                         </div>
                     </div>
+                    <-- Text Area -->
+                    <div class="row mb-3" id="QueryStatusRow">
+                        <div class="col">
+                            <p class="fw-bold">Give Feedback/Suggestion/Instruction on Application:</p>
+                            <textarea id="queryStatus" name="" rows="4" cols="50" style="max-width: 280px"></textarea>
+                        </div>
+                    </div>
                     <div class="row mb-3">
                         <div id="statusUpdate"></div>
                     </div>
@@ -178,6 +192,12 @@ function createModal(appDoc) {
         </div>
     </div>
     `;
+
+    // Clear existing content in the div element of textarea
+    if (appDoc.data().status === 'Closed by User' || appDoc.data().status === 'Completed') {
+        const QueryStatusRow = modal.querySelector('#QueryStatusRow');
+        QueryStatusRow.setAttribute('hidden', 'true');
+    }
 
     // Use querySelector to select the element by id
     const statusUpdateDiv = modal.querySelector('#statusUpdate');
@@ -194,6 +214,8 @@ function createModal(appDoc) {
         const statusOptions3 = ['On Hold', 'Completed'];
 
         let statusOptions = [];
+
+        
 
         if (appDoc.data().status === 'Application Forwarded to Jilla Panchayat' || appDoc.data().status === 'pending') {
             statusOptions = statusOptions1;
@@ -215,7 +237,8 @@ function createModal(appDoc) {
                 button.addEventListener('click', () => {
                     const status = button.textContent;
                     console.log(status);
-                    const updateStatus = { status: status };
+                    const queryStatus = document.getElementById('queryStatus').value;
+                    const updateStatus = { status: status, feedback: queryStatus };
                     const applicationRef = db.collection('application').doc(appDoc.id);
                     applicationRef.update(updateStatus)
                         .then(() => {

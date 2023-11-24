@@ -96,10 +96,12 @@ const addTableRow = (doc, incremental_id) => {
     badge.setAttribute('id', doc.data().status);
     if (badge.id === 'Accepted' || badge.id === 'Completed') {
         badge.setAttribute('class', 'badge badge-success');
-    } else if (badge.id === 'Closed') {
-        badge.setAttribute('class', 'badge badge-danger');
+    } else if (badge.id === 'Rejected' || badge.id === 'Closed by User') {
+        badge.setAttribute('class', 'badge text-light bg-danger');
+    } else if (badge.id === 'InProgress') {
+        badge.setAttribute('class', 'badge text-light bg-primary');
     } else {
-        badge.setAttribute('class', 'badge text-primary')
+        badge.setAttribute('class', 'badge text-light bg-primary');
     }
     status.appendChild(badge);
     row.appendChild(status);
@@ -173,6 +175,18 @@ function createModal(doc) {
                         </div>
                     </div>
                     <div class="row mb-3">
+                        <div class="col">
+                            <p class="fw-bold">Description:</p>
+                            <p>${doc.data().description}</p>
+                        </div> 
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <p class="fw-bold">Feedback/Suggestion/Instruction on Application from admin:</p>
+                            <p>${doc.data().feedback}</p>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
                         <div class="col" id="closeAppCol">
                             <button id="closeApplication" class="btn btn-danger">Close Application</button>
                         </div>
@@ -183,7 +197,7 @@ function createModal(doc) {
     </div>
     `;
 
-    if (doc.data().status === 'Accepted' || doc.data().status === 'Completed' || doc.data().status === 'Closed' || doc.data().status === 'Closed by User' || doc.data().status === 'Rejected') {
+    if (doc.data().status === 'Accepted' || doc.data().status === 'Completed' || doc.data().status === 'Closed' || doc.data().status === 'Closed by User' || doc.data().status === 'Rejected' || doc.data().status === 'InProgress') {
         const closeAppCol = modal.querySelector('#closeAppCol');
         closeAppCol.setAttribute('hidden', 'true');  
     }
