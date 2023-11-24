@@ -194,6 +194,7 @@ function createModal(doc) {
         closeApp(doc.id);
     });
 
+
     // Append the modal directly to the body
     document.body.appendChild(modal);
 
@@ -201,6 +202,14 @@ function createModal(doc) {
     const modalInstance = new bootstrap.Modal(document.getElementById(modalId));
     modalInstance.show();
     
+    const closeApplicationButton = document.getElementById('closeApplication');
+    closeApplicationButton.addEventListener('click', () => {
+        // Perform actions when the "Close Application" button is clicked
+        // For example, you can update the Firestore document status here
+        closeApplication(doc.id);
+        // Close the modal
+        modalInstance.hide();
+    });
 }
 
     
@@ -217,6 +226,17 @@ logoutButton.addEventListener('click', () => {
         });
 });
 
+function closeApplication(applicationId) {
+    const applicationRef = db.collection('application').doc(applicationId);
+
+    // Update the status to 'Closed' or perform any other necessary updates
+    applicationRef.update({
+        status: 'Closed By user'
+    })
+    .then(() => {
+        console.log('Application closed successfully!');
+        // You can update the UI or perform additional actions here
+
 // Assuming you have a global function closeApp
 function closeApp(applicationId) {
     db.collection('application').doc(applicationId).update({
@@ -230,4 +250,6 @@ function closeApp(applicationId) {
     .catch((error) => {
         console.error('Error closing application:', error);
     });
+}
+
 }
