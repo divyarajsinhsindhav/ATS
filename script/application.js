@@ -24,16 +24,22 @@ auth.onAuthStateChanged((user) => {
                         isVillager = doc.data().isVillager;
 
                         const  userID = document.getElementById('userId').value = doc.data().userId;
-                        const firstname = document.getElementById('firstName').value = doc.data().firstName;
-                        const lastname = document.getElementById('lastName').value = doc.data().lastName;
+                        const firstname1 = document.getElementById('firstName').value = doc.data().firstName + " " + doc.data().lastName;
+                        const firstname = doc.data().firstName;
+                        // const lastname = document.getElementById('lastName').value = doc.data().lastName;
+                        const lastname = doc.data().lastName;
                         const email_ = document.getElementById('email').value = doc.data().email;
                         const phonenumber = document.getElementById('phoneNumber').value = doc.data().phoneNumber;
-                        const village_ = document.getElementById('village').value = doc.data().village;
-                        const taluka_ = document.getElementById('taluka').value = doc.data().taluka;
+                        // const village_ = document.getElementById('village').value = doc.data().village;
+                        // const taluka_ = document.getElementById('taluka').value = doc.data().taluka;
+                        const village_ = doc.data().village;
+                        const taluka_ = doc.data().taluka;
                         application(firstname, lastname, email_, phonenumber, village_, taluka_, userID);
                     });
 
                     const where = document.getElementById('where');
+                    console.log(where)
+                    console.log(isVillager)
                     if (isVillager === true) {
                         where.innerHTML = `<option value="gramPanchayat">Gram Panchayat</option>` + where.innerHTML;
                     }
@@ -88,6 +94,7 @@ const application = (firstname, lastname, email_, phonenumber, village_, taluka_
         const phoneNumberValue = phonenumber;
         const userIdValue = userID;
 
+        console.log(firstname);
         // Add all the application details to the database, including the updated status
         db.collection('application').add({
             subject: subject,
@@ -122,7 +129,7 @@ const application = (firstname, lastname, email_, phonenumber, village_, taluka_
         })
         .then(() => {
             alert("Application submitted successfully!");
-            window.location.replace("/user/deshboard.html");
+            window.location.replace("../user/deshboard.html");
         })
         .catch((error) => {
             console.error("Error adding document or uploading file:", error);
@@ -168,7 +175,7 @@ const uploadFile = (file, applicationID, currentUserID) => {
 };
 
 //offline Application
-const userId = document.getElementById('userID').value;
+/* const userId = document.getElementById('userID').value;
 const submitOffline = document.getElementById('submitOffline').value;
 const descriptionOffline = document.getElementById('descriptionOffline').value;
 const subjectOffline = document.getElementById('subjectOffline').value;
@@ -206,4 +213,4 @@ submitOffline.addEventListener('submit', () => {
     .catch((error) => {
         alert("Error submitting application. Please try again later.", error);
     });
-});
+}); */
