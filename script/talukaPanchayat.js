@@ -74,124 +74,90 @@ const addTableRow = (appDoc, incremental_id) => {
     status.appendChild(badge);
     row.appendChild(status);
 
-    const button = document.createElement('td')
-    const buttonRow = document.createElement('button');
+    const buttonRow = document.createElement('td')
+    const button = document.createElement('button');
     button.setAttribute('type', 'button');
     button.setAttribute('data-bs-toggle', 'modal');
     button.setAttribute('data-bs-target', '#exampleModalCenter');
     button.textContent = 'View';
 
-    button.appendChild(buttonRow);
-    row.appendChild(button);
+    buttonRow.appendChild(button);
+    row.appendChild(buttonRow);
 
-    row.setAttribute('id', `tbody ${appDoc.id}`)
+    row.setAttribute('id', `tbody ${doc.id}`)
     tbody.appendChild(row);
 
     button.addEventListener('click', function () {
-        createModal(appDoc);
+        createModal(doc);
       });
 
 };
 
 function createModal(appDoc) {
-    const timestamp = appDoc.data().timestamp;
+    const timestamp = appDoc.data().timestamp
 
     // Convert to milliseconds
     const milliseconds = timestamp.seconds * 1000 + timestamp.nanoseconds / 1e6;
+
+    // Create a Date object
     const date = new Date(milliseconds);
+
+    // Convert to IST
     const options = { timeZone: 'Asia/Kolkata' };
     const istTime = date.toLocaleString('en-US', options);
 
     // Create a new modal
     const modalId = 'modal-' + appDoc.id;
     const modal = document.createElement('div');
-    modal.classList.add('modal', 'fade', 'modal-xl');
+    modal.classList.add('modal', 'fade', 'modal-xxl');
     modal.id = modalId;
-    modal.innerHTML = `modal-view-button
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-light">
-                    <h1 class="modal-title fs-5">APPLICATION DETAIL</h1>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row mb-3">
-                            <div class="col">
-                                <p class="fw-bold">Application ID:</p>
-                                <p>${appDoc.id}</p>
-                            </div>
-                            <div class="col">
-                                <p class="fw-bold">Subject:</p>
-                                <p>${appDoc.data().subject}</p>
-                            </div>
+    modal.innerHTML = `
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-lg"> <!-- Change to modal-fullscreen-lg for full-screen on larger screens -->
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-light">
+                <h1 class="modal-title fs-5">APPLICATION DETAIL</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <p class="fw-bold">Application ID:</p>
+                            <p>${appDoc.id}</p>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                                <p class="fw-bold">Date:</p>
-                                <p>${istTime}</p>
-                            </div>
-                            <div class="col">
-                                <p class="fw-bold">Status:</p>
-                                <p>${appDoc.data().status}</p>
-                            </div>
+                        <div class="col">
+                            <p class="fw-bold">Subject:</p>
+                            <p>${appDoc.data().subject}</p>
                         </div>
-                        <div class="row mb-3">
-                            <p class="fw-bold">Document Link:</p>
-                            <p>${appDoc.data().fileUrl}</p>
+                    </div>
+                    <!-- Add more rows for additional details -->
+                    <div class="row mb-3">
+                        <div class="col">
+                            <p class="fw-bold">Date:</p>
+                            <p>${istTime}</p>
                         </div>
-                        <div class="row mb-3" id="button ${appDoc.id}">
-                            <!-- The status update button will be appended here -->
+                        <div class="col">
+                            <p class="fw-bold">Status:</p>
+                            <p>${appDoc.data().status}</p>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <button id="closeApplication" class="btn btn-danger">Close Application</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+
     `;
 
-    // Generate and append the status update button
-    generateButton(doc, doc.id);
-
-    const button = document.createElement('button');
-    button.setAttribute('type', 'button');
-    button.setAttribute('id', 'passApplication');
-    button.setAttribute('class', 'btn btn-primary');
-    button.textContent = `Pass Application to Jilla Panchayat`;
-    const container = document.getElementById("button " + appDoc.id);
-    container.appendChild(button);
-
-    button.addEventListener('click', () => {
-        // Handle button click, e.g., show application details
-        console.log(`Button clicked for Application ID: ${appDoc.id}`);
-        console.log(appDoc);
-
-        // Update the status field in the specific application document
-        const applicationRef = db.collection('application').appDoc(appDoc.id);
-
-        applicationRef.update({
-            applicationForwardedTo: {
-                'Gram Panchayat': false,
-                'Taluka Panchayat': false,
-                'Jilla Panchayat': true,
-            },
-            applicationReceivedBy: {
-                'Gram Panchayat': false,
-                'Taluka Panchayat': false,
-                'Jilla Panchayat': true,
-            },
-            status: 'Application Forwarded to Jilla Panchayat',
-        })
-        .then(() => {
-            console.log('Application status updated successfully');
-            console.log(appDoc);
-        })
-        .catch(error => {
-            console.error('Error updating application status:', error);
-        });
-    });
-
+    // Append the modal directly to the body
     document.body.appendChild(modal);
 
+    // Open the modal
     const modalInstance = new bootstrap.Modal(document.getElementById(modalId));
     modalInstance.show();
 }

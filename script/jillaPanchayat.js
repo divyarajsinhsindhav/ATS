@@ -75,7 +75,9 @@ const addTableRow = (doc, incremental_id) => {
     status.appendChild(badge);
     row.appendChild(status);
 
+
     const buttonCell = document.createElement('td'); // Create a new <td> for the button
+    const buttonRow = document.createElement('td')
     const button = document.createElement('button');
     button.setAttribute('type', 'button');
     button.setAttribute('data-bs-toggle', 'modal');
@@ -84,8 +86,11 @@ const addTableRow = (doc, incremental_id) => {
     button.classList.add('btn', 'btn-primary'); // Add the btn and btn-primary classes
     buttonCell.appendChild(button);
 
+
     buttonCell.appendChild(button); // Append the button to the new <td>
     row.appendChild(buttonCell);
+    buttonRow.appendChild(button);
+    row.appendChild(buttonRow);
 
     row.setAttribute('id', `tbody ${doc.id}`)
     tbody.appendChild(row);
@@ -113,10 +118,10 @@ function createModal(doc) {
     // Create a new modal
     const modalId = 'modal-' + doc.id;
     const modal = document.createElement('div');
-    modal.classList.add('modal', 'fade', 'modal-xl');
+    modal.classList.add('modal', 'fade', 'modal-xxl');
     modal.id = modalId;
     modal.innerHTML = `
-    <div class="modal-dialog modal-dialog-centered modal-fullscreen-lg"> <!-- Change to modal-fullscreen-lg for full-screen on larger screens -->
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-xl"> <!-- Change to modal-fullscreen-lg for full-screen on larger screens -->
         <div class="modal-content">
             <div class="modal-header bg-primary text-light">
                 <h1 class="modal-title fs-5">APPLICATION DETAIL</h1>

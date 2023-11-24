@@ -104,15 +104,15 @@ const addTableRow = (doc, incremental_id) => {
     status.appendChild(badge);
     row.appendChild(status);
 
-    const button = document.createElement('td')
-    const buttonRow = document.createElement('button');
+    const buttonRow = document.createElement('td')
+    const button = document.createElement('button');
     button.setAttribute('type', 'button');
     button.setAttribute('data-bs-toggle', 'modal');
     button.setAttribute('data-bs-target', '#exampleModalCenter');
     button.textContent = 'View';
 
-    button.appendChild(buttonRow);
-    row.appendChild(button);
+    buttonRow.appendChild(button);
+    row.appendChild(buttonRow);
 
     row.setAttribute('id', `tbody ${doc.id}`)
     tbody.appendChild(row);
@@ -140,10 +140,10 @@ function createModal(doc) {
     // Create a new modal
     const modalId = 'modal-' + doc.id;
     const modal = document.createElement('div');
-    modal.classList.add('modal', 'fade', 'modal-xl');
+    modal.classList.add('modal', 'fade', 'modal-xxl');
     modal.id = modalId;
     modal.innerHTML = `
-    <div class="modal-dialog modal-dialog-centered modal-fullscreen-lg"> <!-- Change to modal-fullscreen-lg for full-screen on larger screens -->
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-xl"> <!-- Change to modal-fullscreen-lg for full-screen on larger screens -->
         <div class="modal-content">
             <div class="modal-header bg-primary text-light">
                 <h1 class="modal-title fs-5">APPLICATION DETAIL</h1>
@@ -173,7 +173,7 @@ function createModal(doc) {
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col">
+                        <div class="col" id="closeAppCol">
                             <button id="closeApplication" class="btn btn-danger">Close Application</button>
                         </div>
                     </div>
@@ -181,9 +181,18 @@ function createModal(doc) {
             </div>
         </div>
     </div>
-
-
     `;
+
+    if (doc.data().status === 'Accepted' || doc.data().status === 'Completed' || doc.data().status === 'Closed' || doc.data().status === 'Closed by User' || doc.data().status === 'Rejected') {
+        const closeAppCol = modal.querySelector('#closeAppCol');
+        closeAppCol.setAttribute('hidden', 'true');  
+    }
+
+    // Add a click event listener to the button
+    const closeApplicationButton = modal.querySelector('#closeApplication');
+    closeApplicationButton.addEventListener('click', () => {
+        closeApp(doc.id);
+    });
 
 
     // Append the modal directly to the body
@@ -201,7 +210,6 @@ function createModal(doc) {
         // Close the modal
         modalInstance.hide();
     });
-
 }
 
     
@@ -228,8 +236,20 @@ function closeApplication(applicationId) {
     .then(() => {
         console.log('Application closed successfully!');
         // You can update the UI or perform additional actions here
+
+// Assuming you have a global function closeApp
+function closeApp(applicationId) {
+    db.collection('application').doc(applicationId).update({
+        status: 'Closed by User'
+    })
+    .then(() => {
+        console.log('Application closed successfully');
+        alert('Application closed successfully');
+        window.location.reload();
     })
     .catch((error) => {
         console.error('Error closing application:', error);
     });
+}
+
 }
