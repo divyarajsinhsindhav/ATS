@@ -75,13 +75,20 @@ const addTableRow = (doc, incremental_id) => {
     status.appendChild(badge);
     row.appendChild(status);
 
+
+    const buttonCell = document.createElement('td'); // Create a new <td> for the button
     const buttonRow = document.createElement('td')
     const button = document.createElement('button');
     button.setAttribute('type', 'button');
     button.setAttribute('data-bs-toggle', 'modal');
     button.setAttribute('data-bs-target', '#exampleModalCenter');
     button.textContent = 'View';
+    button.classList.add('btn', 'btn-primary'); // Add the btn and btn-primary classes
+    buttonCell.appendChild(button);
 
+
+    buttonCell.appendChild(button); // Append the button to the new <td>
+    row.appendChild(buttonCell);
     buttonRow.appendChild(button);
     row.appendChild(buttonRow);
 

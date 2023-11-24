@@ -1,3 +1,13 @@
 body{
     background-color: EDF4FD;
 }
+
+.container{
+    margin: 5rem;
+}
+
+/* Buttons */
+:root {
+    --primary-color: #1352BE;
+    --button-border-color: #1148A7;
+}
