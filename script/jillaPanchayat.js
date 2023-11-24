@@ -172,6 +172,19 @@ function createModal(doc) {
     
 }
 
+const logoutButton = document.getElementById('logout');
+
+logoutButton.addEventListener('click', () => {
+    auth.signOut()
+        .then(() => {
+            alert("logged out successfully.")
+            window.location.assign("/auth/login.html");
+        })
+        .catch((error) => {
+            console.error("Logout error:", error);
+        });
+});
+
 
 // const statusUpdateHTML = (doc) => {
 //     const statusUpdateDiv = document.getElementById('statusUpdate');
