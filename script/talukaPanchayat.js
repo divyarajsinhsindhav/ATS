@@ -197,3 +197,17 @@ function generateButton(doc, targetElementId) {
         });
     });
 }
+
+
+const logoutButton = document.getElementById('logout');
+
+logoutButton.addEventListener('click', () => {
+    auth.signOut()
+        .then(() => {
+            alert("logged out successfully.")
+            window.location.assign("/auth/login.html");
+        })
+        .catch((error) => {
+            console.error("Logout error:", error);
+        });
+});

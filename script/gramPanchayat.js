@@ -109,9 +109,6 @@ const addTableRow = (doc, incremental_id) => {
     buttonCell.appendChild(button);
 
 
-    buttonCell.appendChild(button); // Append the button to the new <td>
-    row.appendChild(buttonCell);
-
     buttonRow.appendChild(button);
     row.appendChild(buttonRow);
 
