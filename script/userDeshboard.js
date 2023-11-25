@@ -198,8 +198,8 @@ function createModal(doc) {
     `;
 
     if (doc.data().status === 'Accepted' || doc.data().status === 'Completed' || doc.data().status === 'Closed' || doc.data().status === 'Closed by User' || doc.data().status === 'Rejected' || doc.data().status === 'InProgress') {
-        const closeAppCol = modal.querySelector('#closeAppCol');
-        closeAppCol.setAttribute('hidden', 'true');  
+        const closeAppCol = modal.querySelector('#closeApplication');
+        closeAppCol.style.display = 'none';
     }
 
     // Add a click event listener to the button
