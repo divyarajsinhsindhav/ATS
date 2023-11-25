@@ -96,7 +96,7 @@ const addTableRow = (doc, incremental_id) => {
     badge.setAttribute('id', doc.data().status);
     if (badge.id === 'Accepted' || badge.id === 'Completed') {
         badge.setAttribute('class', 'badge badge-success');
-    } else if (badge.id === 'Rejected' || badge.id === 'Closed by User') {
+    } else if (badge.id === 'Rejected' || badge.id === 'Closed by User' || badge.id === 'Closed By user') {
         badge.setAttribute('class', 'badge text-light bg-danger');
     } else if (badge.id === 'InProgress') {
         badge.setAttribute('class', 'badge text-light bg-primary');
@@ -197,7 +197,7 @@ function createModal(doc) {
     </div>
     `;
 
-    if (doc.data().status === 'Accepted' || doc.data().status === 'Completed' || doc.data().status === 'Closed' || doc.data().status === 'Closed by User' || doc.data().status === 'Rejected' || doc.data().status === 'InProgress') {
+    if (doc.data().status === 'Accepted' || doc.data().status === 'Completed' || doc.data().status === 'Closed By user' || doc.data().status === 'Closed by User' || doc.data().status === 'Rejected' || doc.data().status === 'InProgress') {
         const closeAppCol = modal.querySelector('#closeApplication');
         closeAppCol.style.display = 'none';
     }
@@ -242,6 +242,7 @@ function closeApp(applicationId) {
     })
     .then(() => {
         console.log('Application closed successfully!');
+        window.location.reload();
         // You can update the UI or perform additional actions here
     })
     .catch((error) => {
