@@ -10,7 +10,8 @@ auth.onAuthStateChanged((user) => {
 
         let incremental_id = 1;
         // Create a query against the collection.
-            application.where('applicationReceivedBy.Jilla Panchayat', '==', true).get().then((snapshot) => {
+            application.orderBy('timestamp', 'asc')
+            .where('applicationReceivedBy.Jilla Panchayat', '==', true).get().then((snapshot) => {
                 if (snapshot.empty) {
                     console.log('No matching documents.');
                     return;

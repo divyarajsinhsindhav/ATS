@@ -12,7 +12,8 @@ auth.onAuthStateChanged((user) => {
         const usersCollection = db.collection('citizen');
 
         // Query the users collection based on the user's email
-        usersCollection.where('email', '==', email).get()
+        usersCollection
+            .where('email', '==', email).get()
             .then((snapshot) => {
                 if (snapshot.empty) {
                     console.log('No user details found for the current user');

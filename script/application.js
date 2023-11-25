@@ -23,7 +23,7 @@ auth.onAuthStateChanged((user) => {
                         // Get the firstName, lastName, taluka, village, isVillager, phoneNumber, userId
                         isVillager = doc.data().isVillager;
 
-                        const  userID = document.getElementById('userId').value = doc.data().userId;
+                        const userID = document.getElementById('userId').value = doc.data().userId;
                         const firstname1 = document.getElementById('firstName').value = doc.data().firstName + " " + doc.data().lastName;
                         const firstname = doc.data().firstName;
                         // const lastname = document.getElementById('lastName').value = doc.data().lastName;
@@ -95,6 +95,7 @@ const application = (firstname, lastname, email_, phonenumber, village_, taluka_
         const userIdValue = userID;
 
         console.log(firstname);
+
         // Add all the application details to the database, including the updated status
         db.collection('application').add({
             subject: subject,
@@ -121,20 +122,20 @@ const application = (firstname, lastname, email_, phonenumber, village_, taluka_
             },
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         })
-        .then((docRef) => {
-            console.log("Document written with ID: ", docRef.id);
-            const applicationID = docRef.id;
-            const currentUserID = userIdValue; // Replace with your current user ID
-            return uploadFile(file, applicationID, currentUserID, subject);
-        })
-        .then(() => {
-            alert("Application submitted successfully!");
-            window.location.replace("../user/deshboard.html");
-        })
-        .catch((error) => {
-            console.error("Error adding document or uploading file:", error);
-            alert("Error submitting application. Please try again later.");
-        });
+            .then((docRef) => {
+                console.log("Document written with ID: ", docRef.id);
+                const applicationID = docRef.id; // Retrieve the auto-generated ID
+                const currentUserID = userIdValue; // Replace with your current user ID
+                return uploadFile(file, applicationID, currentUserID, subject);
+            })
+            .then(() => {
+                alert("Application submitted successfully!");
+                window.location.replace("../user/deshboard.html");
+            })
+            .catch((error) => {
+                console.error("Error adding document or uploading file:", error);
+                alert("Error submitting application. Please try again later.");
+            });
     });
 };
 

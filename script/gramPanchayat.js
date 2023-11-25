@@ -18,7 +18,8 @@ auth.onAuthStateChanged((user) => {
                         const villageId = villageDoc.id;
                         let incremental_id = 1;
                         // Query applications for the current village
-                        application.where('applicationReceivedBy.Gram Panchayat', '==', true)
+                        application.orderBy('timestamp', 'asc') // Add this line to sort by timestamp
+                            .where('applicationReceivedBy.Gram Panchayat', '==', true)
                             .where('village', '==', villageId)
                             .get()
                             .then((appSnapshot) => {
@@ -88,7 +89,7 @@ const addTableRow = (doc, incremental_id) => {
     badge.setAttribute('id', doc.data().status);
     if (badge.id === 'Accepted' || badge.id === 'Completed') {
         badge.setAttribute('class', 'badge badge-success');
-    } else if ( badge.id === 'Closed by User') {
+    } else if (badge.id === 'Closed by User') {
         badge.setAttribute('class', 'badge badge-danger');
     } else if (badge.id === 'Rejected') {
         badge.setAttribute('class', 'badge badge-warning');
@@ -124,7 +125,7 @@ const addTableRow = (doc, incremental_id) => {
 
     button.addEventListener('click', function () {
         createModal(doc);
-      });
+    });
 
 };
 
@@ -271,7 +272,7 @@ function createModal(appDoc) {
                 button.addEventListener('click', () => {
                     const status = button.textContent;
                     console.log(status);
-                    const updateStatus = { status: status };
+                    const updateStatus = { status: status, feedback: document.getElementById('queryStatus').value };
                     const applicationRef = db.collection('application').doc(appDoc.id);
                     applicationRef.update(updateStatus)
                         .then(() => {
@@ -315,7 +316,7 @@ function createModal(appDoc) {
                 console.error('Error updating application status:', error);
             });
     });
-    
+
     if (appDoc.data().status === 'Closed By user' || appDoc.data().status === 'Rejected') {
         passApplicationButton.style.display = 'none';
     }

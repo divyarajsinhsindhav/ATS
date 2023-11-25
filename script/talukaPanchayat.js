@@ -15,7 +15,8 @@ auth.onAuthStateChanged((user) => {
 
                 const application = db.collection('application');
                 let incremental_id = 1;
-                application.where('applicationReceivedBy.Taluka Panchayat', '==', true)
+                application.orderBy('timestamp', 'asc')
+                    .where('applicationReceivedBy.Taluka Panchayat', '==', true)
                     .where('taluka', '==', taluka).get().then((snapshot) => {
                         snapshot.forEach(appDoc => {
                             console.log(appDoc.id, '=>', appDoc.data());
@@ -233,7 +234,7 @@ function createModal(appDoc) {
                 button.addEventListener('click', () => {
                     const status = button.textContent;
                     console.log(status);
-                    const updateStatus = { status: status };
+                    const updateStatus = { status: status, feedback: document.getElementById('queryStatus').value };
                     const applicationRef = db.collection('application').doc(appDoc.id);
                     applicationRef.update(updateStatus)
                         .then(() => {
