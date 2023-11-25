@@ -4,15 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>password recovry</title>
+    <style>
+        body{
+            text-align: center;
+            background-color: #a7c4f6;
+        }
+        h3{
+            font-size: 50px;
+            color: #1148a7;
+        }
+        label{
+            font-size: 25px;
+            color: #1148a7;
+            margin: 1rem;
+        }
+        #floatinginput{
+            height: 4vh;
+        }
+        .btn{
+            height: 40px;
+            width: 80px;
+            margin: 2rem;
+            background-color: #1148a7;
+            color: white;
+            border: none;
+            border-radius: 20px;
+        }
+        .btn:hover{
+            background-color: blue;
+            color: whitesmoke;
+        }
+    </style>
 </head>
 <body>
+<div class="head">
     <h3>Password Recovry</h3>
     <P class="error"></P>
     <div>
-        <input type="email" class="forgetemail" id="floatinginput" placeholder="Enter your Email">
-        <label for="floatinginput">Email address</label>
+        <label for="floatinginput">Email address:</label>
+        <input type="email" style="font-size: 16pt;" class="forgetemail" id="floatinginput" placeholder="Enter your Email">
     </div>
     <button class="btn" id="submit-data">Submit</button>
+</div>
 
     <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>

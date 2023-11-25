@@ -97,7 +97,7 @@ const addTableRow = (doc, incremental_id) => {
     } else if (badge.id === 'InProgress') {
         badge.setAttribute('class', 'badge badge-primary');
     } else {
-        badge.setAttribute('class', 'badge text-primary');
+        badge.setAttribute('class', 'badge text-white');
     }
     status.appendChild(badge);
     row.appendChild(status);
